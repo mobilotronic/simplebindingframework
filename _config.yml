@@ -2,3 +2,4 @@ theme: jekyll-theme-cayman
 title: Simple binding framework
 description: >-
 Simple binding framework is a small JavaScript library that helps you build data-driven web applications
+name: Simple binding framework
