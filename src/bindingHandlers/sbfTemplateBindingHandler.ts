@@ -6,9 +6,9 @@ import {
 import {
     SBF_CURRENT_BINDING_CONTEXT,
     SBF_PARENT_BINDING_CONTEXT,
-    SBF_SKIP_CONTEXT_BINDING,
-    SBFManager
+    SBF_SKIP_CONTEXT_BINDING
 } from "../common/sbfCommon";
+import {SBFManager} from "../common/sbfManager";
 
 export class SBFTemplateBindingHandler extends SBFBaseBindingHandler<ISBFTemplateHandlerOptions>{
     //#region private
@@ -38,7 +38,8 @@ export class SBFTemplateBindingHandler extends SBFBaseBindingHandler<ISBFTemplat
             newNode[SBF_CURRENT_BINDING_CONTEXT] = this.element[SBF_CURRENT_BINDING_CONTEXT];
             newNode[SBF_PARENT_BINDING_CONTEXT] = this.element[SBF_CURRENT_BINDING_CONTEXT];
             newNode[SBF_SKIP_CONTEXT_BINDING] = true;
-            SBFManager.applyBindings(newNode,newNode[SBF_PARENT_BINDING_CONTEXT]);
+            //if a binding viewmodel was given, then use that. otherwise fallback to use the parent binding context.
+            SBFManager.applyBindings(newNode,this.bindingOptions.bindingViewModel ? this.bindingOptions.bindingViewModel : newNode[SBF_PARENT_BINDING_CONTEXT]);
             this.element.appendChild(newNode);
         }
         if(this.bindingOptions.foreachData && !Array.isArray(this.bindingOptions.foreachData)){

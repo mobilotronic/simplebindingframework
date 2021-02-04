@@ -1,6 +1,6 @@
 {
   "name": "@mobilotronic/sbf",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "Simple binding framework",
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
   },
   "scripts": {
     "build": "gulp -b --color --gulpfile gulpfile.js buildProduction",
-    "publishToVerdaccio": "npm run test && typedoc src/index.ts && gulp -b --color --gulpfile gulpfile.js publishToVerdaccio",
+    "publishToVerdaccio": "npm run test && typedoc && gulp -b --color --gulpfile gulpfile.js publishToVerdaccio",
     "compileTS": "gulp -b --color --gulpfile gulpfile.js compileTS",
     "test": "mocha -r ts-node/register --no-timeouts --colors tests/**/*.ts"
   }

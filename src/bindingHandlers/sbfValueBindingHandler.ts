@@ -1,10 +1,11 @@
 import {SBFBaseBindingHandler} from "./sbfBindingHandler";
 import {ISBFLocalization, ISBFValueBindingHandlerOptions} from "../common/interfaces";
-import {SBFManager} from "../common/sbfCommon";
+import {SBFCommon} from "../common/sbfCommon";
 
 export class SBFValueBindingHandler extends SBFBaseBindingHandler<ISBFValueBindingHandlerOptions>{
     //#region private
     private static twoWayBindingElements = ["INPUT","TEXTAREA","SELECT"];
+    // noinspection JSMethodCanBeStatic
     private strToBool(value:string):boolean{
         let result = value.toLowerCase() == "true" || value.toLowerCase() == "false";
         if(result)
@@ -25,15 +26,17 @@ export class SBFValueBindingHandler extends SBFBaseBindingHandler<ISBFValueBindi
     //#region protected
     protected initialize() {
         this.bindingOptions.observable.addNotificationSubscription(this.notificationSubscription.bind(this));
+        if(this.bindingOptions.observable.value)
+            this.elementAs<HTMLInputElement>().value = this.bindingOptions.observable.value;
         this.element.addEventListener("blur", () => {
-            SBFManager.log(`Changing observable ${this.bindingOptions.observable.id} value from blur event`);
+            SBFCommon.log(`Changing observable ${this.bindingOptions.observable.id} value from blur event`);
             this.bindingOptions.observable.value = (<HTMLInputElement>this.element).value;
         });
         if(this.bindingOptions.keyboardTriggersChange) {
             let key = this.strToBool(<string>this.bindingOptions.keyboardTriggersChange) == true ? "Enter" : this.bindingOptions.keyboardTriggersChange;
             this.element.addEventListener("keydown", (event: KeyboardEvent) => {
                 if (event.key == key) {
-                    SBFManager.log(`Changing observable ${this.bindingOptions.observable.id} value from keyboard event`);
+                    SBFCommon.log(`Changing observable ${this.bindingOptions.observable.id} value from keyboard event`);
                     this.bindingOptions.observable.value = (<HTMLInputElement>this.element).value;
                 }
             });

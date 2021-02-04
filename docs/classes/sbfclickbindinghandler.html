@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SBFManager | Simple binding framework</title>
+	<title>SBFClickBindingHandler | Simple binding framework</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,7 +55,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="sbfmanager.html">SBFManager</a>
+					<a href="sbfclickbindinghandler.html">SBFClickBindingHandler</a>
 				</li>
 			</ul>
 		</div>
@@ -73,12 +73,17 @@
 			</nav>
 		</div>
 		<div class="col-7 offset-3 col-content">
-			<h1>Class SBFManager</h1>
+			<h1>Class SBFClickBindingHandler</h1>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SBFManager</span>
+						<a href="sbfbasebindinghandler.html" class="tsd-signature-type">SBFBaseBindingHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ISBFClickHandlerOptions</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">SBFClickBindingHandler</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -88,15 +93,20 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="sbfmanager.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="sbfclickbindinghandler.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="sbfclickbindinghandler.html#bindingoptions" class="tsd-kind-icon">binding<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="sbfmanager.html#applybindings" class="tsd-kind-icon">apply<wbr>Bindings</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="sbfmanager.html#cleannode" class="tsd-kind-icon">clean<wbr>Node</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="sbfmanager.html#registerbindinghandler" class="tsd-kind-icon">register<wbr>Binding<wbr>Handler</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="sbfclickbindinghandler.html#dispose" class="tsd-kind-icon">dispose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="sbfclickbindinghandler.html#elementas" class="tsd-kind-icon">element<wbr>As</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,82 +114,20 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new SBFManager<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sbfmanager.html" class="tsd-signature-type">SBFManager</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new SBFClick<wbr>Binding<wbr>Handler<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, bindingOptions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISBFClickHandlerOptions</span>, localization<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ISBFLocalization</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="sbfclickbindinghandler.html" class="tsd-signature-type">SBFClickBindingHandler</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="sbfmanager.html" class="tsd-signature-type">SBFManager</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="applybindings" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> apply<wbr>Bindings</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">apply<wbr>Bindings<span class="tsd-signature-symbol">(</span>rootElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, viewModel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, localization<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ISBFLocalization</span>, attributeName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
+								<p>Inherited from <a href="sbfbasebindinghandler.html">SBFBaseBindingHandler</a>.<a href="sbfbasebindinghandler.html#constructor">constructor</a></p>
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-shorttext">
 								<div class="lead">
-									<p>Iterates through the DOM, from the given element level, and applies SBF bindings.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>rootElement: <span class="tsd-signature-type">Element</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The rootElement for the SBF binding context.</p>
-									</div>
-								</li>
-								<li>
-									<h5>viewModel: <span class="tsd-signature-type">any</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The binding context.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> localization: <span class="tsd-signature-type">ISBFLocalization</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>A localization engine.</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> attributeName: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The attribute where to look for binding options. Default is &#39;data-bind-sbf&#39;</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="cleannode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> clean<wbr>Node</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">clean<wbr>Node<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<div class="tsd-comment tsd-typography tsd-comment-shorttext">
-								<div class="lead">
-									<p>Removes all child nodes for the given element.</p>
+									<p>Creates a click binding handler.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -187,19 +135,34 @@
 								<li>
 									<h5>element: <span class="tsd-signature-type">Element</span></h5>
 									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The element to clean.</p>
+										<p>The element to bind against.</p>
+									</div>
+								</li>
+								<li>
+									<h5>bindingOptions: <span class="tsd-signature-type">ISBFClickHandlerOptions</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The binding options.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> localization: <span class="tsd-signature-type">ISBFLocalization</span></h5>
+									<div class="tsd-comment tsd-typography tsd-comment-text">
+										<p>The localization object in order to localize any string, that needs localization.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="sbfclickbindinghandler.html" class="tsd-signature-type">SBFClickBindingHandler</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="registerbindinghandler" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> register<wbr>Binding<wbr>Handler</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">register<wbr>Binding<wbr>Handler<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, details<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISBFBindingHandlerRepositoryItem</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="bindingoptions" class="tsd-anchor"></a>
+					<h3>binding<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> bindingOptions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -207,25 +170,54 @@
 							</aside>
 							<div class="tsd-comment tsd-typography tsd-comment-shorttext">
 								<div class="lead">
-									<p>Register a SBF binding handler.</p>
+									<p>The binding options.</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="dispose" class="tsd-anchor"></a>
+					<h3>dispose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">dispose<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sbfbasebindinghandler.html">SBFBaseBindingHandler</a>.<a href="sbfbasebindinghandler.html#dispose">dispose</a></p>
+							</aside>
+							<div class="tsd-comment tsd-typography tsd-comment-shorttext">
+								<div class="lead">
+									<p>Called when the binding element is removed from the DOM.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+					<a name="elementas" class="tsd-anchor"></a>
+					<h3>element<wbr>As</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">element<wbr>As&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="sbfbasebindinghandler.html">SBFBaseBindingHandler</a>.<a href="sbfbasebindinghandler.html#elementas">elementAs</a></p>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The name of the binding handler.</p>
-									</div>
-								</li>
-								<li>
-									<h5>details: <span class="tsd-signature-type">ISBFBindingHandlerRepositoryItem</span></h5>
-									<div class="tsd-comment tsd-typography tsd-comment-text">
-										<p>The binding handler registration details.</p>
-									</div>
+									<h4>T</h4>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -241,9 +233,27 @@
 					<li class=" tsd-kind-class tsd-has-type-parameter root">
 						<a href="sbfbasebindinghandler.html" class="tsd-kind-icon">SBFBase<wbr>Binding<wbr>Handler</a>
 					</li>
-					<li class=" tsd-kind-class root">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class root">
 						<a href="sbfclickbindinghandler.html" class="tsd-kind-icon">SBFClick<wbr>Binding<wbr>Handler</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="sbfclickbindinghandler.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="sbfclickbindinghandler.html#bindingoptions" class="tsd-kind-icon">binding<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="sbfclickbindinghandler.html#dispose" class="tsd-kind-icon">dispose</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+								<a href="sbfclickbindinghandler.html#elementas" class="tsd-kind-icon">element<wbr>As</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter root">
 						<a href="sbfcomputedobservable.html" class="tsd-kind-icon">SBFComputed<wbr>Observable</a>
 					</li>
@@ -256,27 +266,9 @@
 					<li class=" tsd-kind-class root">
 						<a href="sbfforeachbindinghandler.html" class="tsd-kind-icon">SBFFor<wbr>Each<wbr>Binding<wbr>Handler</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class root">
+					<li class=" tsd-kind-class root">
 						<a href="sbfmanager.html" class="tsd-kind-icon">SBFManager</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="sbfmanager.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="sbfmanager.html#applybindings" class="tsd-kind-icon">apply<wbr>Bindings</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="sbfmanager.html#cleannode" class="tsd-kind-icon">clean<wbr>Node</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="sbfmanager.html#registerbindinghandler" class="tsd-kind-icon">register<wbr>Binding<wbr>Handler</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-has-type-parameter root">
 						<a href="sbfobservable.html" class="tsd-kind-icon">SBFObservable</a>
 					</li>

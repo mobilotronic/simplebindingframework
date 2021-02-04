@@ -173,7 +173,7 @@ export interface ISBFBindingHandlerOptions{
     /**
      * Always returns true.
      */
-    isBindingHandlerOptionsObject:boolean;
+    isBindingHandlerOptionsObject?:boolean;
 }
 
 /**

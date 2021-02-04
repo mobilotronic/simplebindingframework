@@ -1,7 +1,9 @@
 import {SBFBaseBindingHandler} from "./sbfBindingHandler";
 import {ISBFForeachHandlerOptions, ISBFLocalization} from "../common/interfaces";
 import {SBFObservable} from "../common/sbfObservable";
-import {SBF_CURRENT_BINDING_CONTEXT, SBF_PARENT_BINDING_CONTEXT, SBF_SKIP_CONTEXT_BINDING, SBFManager} from "../common/sbfCommon";
+import {SBFManager} from "../common/sbfManager";
+import {SBF_CURRENT_BINDING_CONTEXT, SBF_PARENT_BINDING_CONTEXT, SBF_SKIP_CONTEXT_BINDING} from "../common/sbfCommon";
+
 
 export class SBFForEachBindingHandler extends SBFBaseBindingHandler<ISBFForeachHandlerOptions>{
     //#region private

@@ -14,12 +14,22 @@ export class SBFAttributeBindingHandler extends SBFBaseBindingHandler<ISBFAttrib
             let attrValue = this.bindingOptions[attribute] ? this.bindingOptions[attribute]: attribute;
             if(attrValue instanceof SBFObservable){
                 attrValue.addNotificationSubscription((value)=>{
-                    if(value == null)
-                        this.element.setAttribute(attribute,this.localizeValue(attrValue));
-                    else
-                        this.element.removeAttribute(attribute);
+                    if(typeof value == "boolean"){
+                        if(value)
+                            this.element.setAttribute(attribute, attrValue);
+                        else
+                            this.element.removeAttribute(attribute);
+                    }
+                    else {
+                        if (value != null)
+                            this.element.setAttribute(attribute, this.localizeValue(attrValue));
+                        else
+                            this.element.removeAttribute(attribute);
+                    }
                 });
-                this.element.setAttribute(attribute,attrValue.value);
+                //if the attribute has a value then add it.
+                if(attrValue.value)
+                    this.element.setAttribute(attribute,attrValue.value);
             }else{
                 if(this.bindingOptions[attribute] == null || this.bindingOptions[attribute] == undefined)
                     this.element.removeAttribute(attribute)

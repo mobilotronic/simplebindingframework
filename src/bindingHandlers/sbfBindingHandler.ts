@@ -46,9 +46,13 @@ export class SBFBaseBindingHandler<T>{
         this.element = element;
         this.bindingContext = this.element[SBF_CURRENT_BINDING_CONTEXT];
         this._bindingHandlerOptions = bindingOptions;
-        this.mutationCallback = this.mutationCallback.bind(this);
-        this.mutationObserver = new MutationObserver(this.mutationCallback);
-        this.mutationObserver.observe(this.element.parentNode,{childList:true,subtree:true});
+        //if the element is part of a template, that is not yet rendered
+        //there is no parentNode.
+        if(this.element.parentNode) {
+            this.mutationCallback = this.mutationCallback.bind(this);
+            this.mutationObserver = new MutationObserver(this.mutationCallback);
+            this.mutationObserver.observe(this.element.parentNode, {childList: true, subtree: true});
+        }
         this.localization = localization;
     }
     //#endregion
@@ -60,6 +64,9 @@ export class SBFBaseBindingHandler<T>{
         this._bindingHandlerOptions = null;
         this.mutationObserver.disconnect();
         this.mutationObserver = null;
+    }
+    elementAs<T>():T{
+        return <T><unknown>this.element;
     }
     //#endregion
 }

@@ -7,7 +7,7 @@ import {
 } from "./interfaces";
 
 //import {nanoid} from "nanoid";
-import {SBFManager} from "./sbfCommon";
+import {SBFCommon} from "./sbfCommon";
 
 
 // noinspection RegExpRedundantEscape
@@ -76,7 +76,7 @@ export class SBFObservable<T> implements ISBFObservable<T>{
 
  //#region protected
     protected notifySubscribers(){
-        SBFManager.log(`Notifying subscribers for ${this.id}.`);
+        SBFCommon.log(`Notifying subscribers for ${this.id}.`);
         this.subscriptions.forEach((s)=>{
             s(this.value);
         });
@@ -122,14 +122,14 @@ export class SBFObservable<T> implements ISBFObservable<T>{
      */
     set value(newValue:T){
         let notifySubscribers = this.shouldNotifySubscribers(this._value,newValue);
-        SBFManager.log(`Value update for observable ${this.options.name ? this.options.name : this.id}.`);
+        SBFCommon.log(`Value update for observable ${this.options.name ? this.options.name : this.id}.`);
         this._value = newValue;
         if(notifySubscribers) {
-            SBFManager.log(`Value change for observable ${this.options.name ? this.options.name : this.id}. New value is ${newValue}`);
+            SBFCommon.log(`Value change for observable ${this.options.name ? this.options.name : this.id}. New value is ${newValue}`);
             this.notifySubscribers();
         }
         else
-            SBFManager.log(`No value change for ${this.options.name ? this.options.name : this.id}. Not notifying subscribers`);
+            SBFCommon.log(`No value change for ${this.options.name ? this.options.name : this.id}. Not notifying subscribers`);
     }
     /**
      * Adds a notification subscription. Consumers can use this to track value changes.

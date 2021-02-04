@@ -102,28 +102,22 @@ function compileTS() {
 
 //#region version helper methods
 function incrementMajor(){
-    return gulp.src("./package.json")
-        .pipe(gulpBump({type:"major"}))
-        .pipe(gulp.dest("./"));
+    return runCommand("npm",["version","--no-git-tag-version","major"]);
 }
 function incrementMinor(){
-    return gulp.src("./package.json")
-        .pipe(gulpBump({type:"minor"}))
-        .pipe(gulp.dest("./"));
+    return runCommand("npm",["version","--no-git-tag-version","minor"]);
 }
 function incrementPatch(){
-    return gulp.src("./package.json")
-        .pipe(gulpBump({type:"patch"}))
-        .pipe(gulp.dest("./"));
+    return runCommand("npm",["version","--no-git-tag-version","patch"]);
 }
 async function publishToVerdaccio(){
     process.chdir("build/production");
-    try {
-        await runCommand("npm", ["unpublish", "--force", "--registry", verdaccio]);
-    }
-    catch{
-
-    }
+    // try {
+    //     //await incrementPatch();//runCommand("npm", ["unpublish", "--force", "--registry", verdaccio]);
+    // }
+    // catch{
+    //
+    // }
     return runCommand("npm",["publish","--registry",verdaccio]);
 }
 //#endregion
@@ -134,7 +128,7 @@ async function publishToVerdaccio(){
  * Outputs in a separate folder for testing purposes.
  */
 gulp.task("buildProduction", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles]));
-gulp.task("publishToVerdaccio", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles,publishToVerdaccio]));
+gulp.task("publishToVerdaccio", gulp.series([incrementPatch,"buildProduction",publishToVerdaccio]));
 
 gulp.task("compileTS", gulp.series([compileTS]));
 gulp.task("publishMajor",gulp.series([incrementMajor,"buildProduction"]));

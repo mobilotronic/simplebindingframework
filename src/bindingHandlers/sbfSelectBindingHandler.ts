@@ -1,11 +1,12 @@
 import {SBFBaseBindingHandler} from "./sbfBindingHandler";
-import {ISBFLocalization, ISBFObservable, ISBFSelectHandlerOptions, ISBFVisibleHandlerOptions} from "../common/interfaces";
-import {SBFManager} from "../common/sbfCommon";
+import {ISBFLocalization,ISBFSelectHandlerOptions} from "../common/interfaces";
+import {SBFManager} from "../common/sbfManager";
+import {SBFCommon} from "../common/sbfCommon";
 
 export class SBFSelectBindingHandler extends SBFBaseBindingHandler<ISBFSelectHandlerOptions>{
     //#region private
     private static allowedElements = ["SELECT","DATALIST"];
-    private get dataToRender(){ return SBFManager.isObservable(this.bindingOptions.data) ? this.bindingOptions.data.value : this.bindingOptions.data;}
+    private get dataToRender(){ return SBFCommon.isObservable(this.bindingOptions.data) ? this.bindingOptions.data.value : this.bindingOptions.data;}
     private onSelectionChange(event:Event){
         if((<HTMLSelectElement>this.element).selectedIndex >= 0) {
             let selectedItem = this.dataToRender[(<HTMLSelectElement>this.element).selectedIndex];
@@ -39,12 +40,12 @@ export class SBFSelectBindingHandler extends SBFBaseBindingHandler<ISBFSelectHan
     //#region protected
     protected initialize(){
         this.element.addEventListener("change",this.onSelectionChange.bind(this));
-        if(SBFManager.isObservable(this.bindingOptions.data)){
+        if(SBFCommon.isObservable(this.bindingOptions.data)){
             this.bindingOptions.data.addNotificationSubscription((value)=>{
                 this.renderData(value);
             });
         }
-        if(SBFManager.isObservable(this.bindingOptions.value)){
+        if(SBFCommon.isObservable(this.bindingOptions.value)){
             this.bindingOptions.value.addNotificationSubscription((value)=>{
                 let dataToRender = Array.isArray(this.bindingOptions.data) ? this.bindingOptions.data : this.bindingOptions.data.value;
                 (<HTMLSelectElement>this.element).selectedIndex = dataToRender.findIndex((dataRow,index)=>{
