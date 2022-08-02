@@ -28,7 +28,7 @@
     "gulp-typescript": "^5.0.1",
     "fs-extra": "^9.1.0",
     "gulp-bump": "^3.2.0",
-    "mocha": "^8.2.1",
+    "mocha": "^10.0.0",
     "chai": "^4.2.0",
     "jsdom": "^16.4.0",
     "ts-node": "^9.1.1",
