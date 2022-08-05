@@ -4,16 +4,16 @@ import {
     ISBFObservable,
     ISBFTextHandlerOptions
 } from "./interfaces";
-import {SBFTextBindingHandler} from "../bindingHandlers/sbfTextBindingHandler";
-import {SBFClickBindingHandler} from "../bindingHandlers/sbfClickBindingHandler";
-import {SBFValueBindingHandler} from "../bindingHandlers/sbfValueBindingHandler";
-import {SBFVisibleBindingHandler} from "../bindingHandlers/sbfVisibleBindingHandler";
-import {SBFAttributeBindingHandler} from "../bindingHandlers/sbfAttributeBindingHandler";
-import {SBFForEachBindingHandler} from "../bindingHandlers/sbfForEachBindingHandler";
-import {SBFTemplateBindingHandler} from "../bindingHandlers/sbfTemplateBindingHandler";
-import {SBFEventBindingHandler} from "../bindingHandlers/sbfEventBindingHandler";
-import {SBFSelectBindingHandler} from "../bindingHandlers/sbfSelectBindingHandler";
-import {SBFCssBindingHandler} from "../bindingHandlers/sbfCssBindingHandler";
+import {SBFTextBindingHandler} from "..";
+import {SBFClickBindingHandler} from "..";
+import {SBFValueBindingHandler} from "..";
+import {SBFVisibleBindingHandler} from "..";
+import {SBFAttributeBindingHandler} from "..";
+import {SBFForEachBindingHandler} from "..";
+import {SBFTemplateBindingHandler} from "..";
+import {SBFEventBindingHandler} from "..";
+import {SBFSelectBindingHandler} from "..";
+import {SBFCssBindingHandler} from "..";
 import {SBFObservable} from "./sbfObservable";
 
 export type SBFLoglevel = "info" | "error" | "warning" | "debug";
@@ -49,7 +49,8 @@ export const SBFBindingHandlersRepository = <ISBFBindingHandlersRepository>{
                 (bindingValue instanceof Date) ||
                 bindingValue.isBindingHandlerOptionsObject == true;
         },
-        formatBindingOptions:(options:string)=>{ return `{observable:${options}`;}
+        castOptionsAs:<ISBFTextHandlerOptions>(bindingOptions:any) =>{ return <ISBFTextHandlerOptions>bindingOptions;},
+        formatBindingOptions:(options:string)=>{ return `{observable:${options}}`;}
     },
     "click":<ISBFBindingHandlerRepositoryItem>{
         bindingHandler:SBFClickBindingHandler,

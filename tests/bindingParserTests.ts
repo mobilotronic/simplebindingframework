@@ -1,21 +1,22 @@
 import 'mocha';
 import {assert} from "chai";
 import {SBFBindingsParser} from "../src/common/sbfBindingsParser";
-import {SBFObservable} from "../src/common/sbfObservable";
+import {SBFObservable} from "../src";
 import {SBF_CURRENT_BINDING_CONTEXT, SBFBindingHandlersRepository} from "../src/common/sbfCommon";
-import {SBFValueBindingHandler} from "../src/bindingHandlers/sbfValueBindingHandler";
+import {SBFValueBindingHandler} from "../src";
 import {JSDOM} from "jsdom";
-import {SBFAttributeBindingHandler} from "../src/bindingHandlers/sbfAttributeBindingHandler";
-import {SBFEventBindingHandler} from "../src/bindingHandlers/sbfEventBindingHandler";
-import {SBFClickBindingHandler} from "../src/bindingHandlers/sbfClickBindingHandler";
-import {SBFForEachBindingHandler} from "../src/bindingHandlers/sbfForEachBindingHandler";
+import {SBFAttributeBindingHandler} from "../src";
+import {SBFEventBindingHandler} from "../src";
+import {SBFClickBindingHandler} from "../src";
+import {SBFForEachBindingHandler} from "../src";
 import * as fs from "fs";
 import * as path from "path";
-import {SBFVisibleBindingHandler} from "../src/bindingHandlers/sbfVisibleBindingHandler";
-import {SBFTextBindingHandler} from "../src/bindingHandlers/sbfTextBindingHandler";
+import {SBFVisibleBindingHandler} from "../src";
+import {SBFTextBindingHandler} from "../src";
 import {ISBFClickHandlerOptions, ISBFForeachHandlerOptions, ISBFSelectHandlerOptions} from "../src/common/interfaces";
-import {SBFSelectBindingHandler} from "../src/bindingHandlers/sbfSelectBindingHandler";
-import {ISBFValueBindingHandlerOptions, SBFManager} from "../build/production";
+import {SBFSelectBindingHandler} from "../src";
+import {SBFManager} from "../src";
+import {ISBFValueBindingHandlerOptions} from "../src/common/interfaces";
 
 const DOM = new JSDOM(fs.readFileSync(path.join(__dirname,"./SBFTestPage.html"),"utf8"));
 // @ts-ignore
@@ -80,7 +81,7 @@ describe("Binding parser tests",()=>{
                             let bindingHandler = new SBFValueBindingHandler(element, bindingHandlerOptions);
                             //testing handler accepting a binding options object.
                             // noinspection JSUnfilteredForInLoop
-                            assert.equal(bindingHandler.bindingOptions.keyboardTriggersChange, "true");
+                            assert.equal(bindingHandler.bindingOptions.keyboardTriggersChange, true);
                             break;
                         }
                         case "attr":{
@@ -173,14 +174,14 @@ describe("Binding parser tests",()=>{
                     let spanElement = document.createElement("SPAN");
                     switch (i){
                         case 0:{spanElement.setAttribute("data-bind-sbf","text:id");break;}
-                        case 1:{spanElement.setAttribute("data-bind-sbf","text:code");break;}
+                        case 1:{spanElement.setAttribute("data-bind-sbf","text:{observable:code,treatNumericStringsAsNumbers:false}");break;}
                         case 2:{spanElement.setAttribute("data-bind-sbf","text:description");break;}
                     }
                     childElement.appendChild(spanElement);
                 }
                 element.setAttribute("data-bind-sbf","foreach:TempData");
                 element.appendChild(childElement);
-                new SBFForEachBindingHandler(element, <ISBFForeachHandlerOptions>bindingOptions["foreach"]);
+                 new SBFForEachBindingHandler(element, <ISBFForeachHandlerOptions>bindingOptions["foreach"]);
                 assert.equal(element.children.length,viewModel.TempData.length);
                 for(let i=0;i<=element.children.length-1;i++){
                     assert.equal(element.children[i].children[0].textContent,viewModel.TempData[i].id.toString());
@@ -202,9 +203,11 @@ describe("Binding parser tests",()=>{
             try{
                 SBFManager.applyBindings(document.getElementById("bindingRoot"),viewModel);
                 let tbody = document.querySelector("tbody");
-                assert.equal(tbody.querySelectorAll("tr").length,2);
-                assert.equal(tbody.querySelectorAll("tr")[0].querySelectorAll("td").length,3);
-                assert.equal(tbody.querySelectorAll("tr")[1].querySelectorAll("td").length,3);
+                if(tbody){
+                    assert.equal(tbody.querySelectorAll("tr").length,2);
+                    assert.equal(tbody.querySelectorAll("tr")[0].querySelectorAll("td").length,3);
+                    assert.equal(tbody.querySelectorAll("tr")[1].querySelectorAll("td").length,3);
+                }
                 resolve();
             }
             catch (error){
@@ -221,7 +224,7 @@ describe("Binding parser tests",()=>{
             try{
                 element[SBF_CURRENT_BINDING_CONTEXT] = viewModel;
                 let bindingHandler = new SBFValueBindingHandler(element, bindingOptions["value"]);
-                assert.equal(bindingHandler.bindingOptions.keyboardTriggersChange, "true");
+                assert.equal(bindingHandler.bindingOptions.keyboardTriggersChange, true);
                 resolve();
             }
             catch (error){

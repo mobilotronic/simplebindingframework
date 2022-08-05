@@ -18,6 +18,9 @@ export interface ISBFBindingHandlerRepositoryItem {
      * @param bindingOptions
      */
     formatBindingOptions?:(bindingOptions:string)=>string;
+
+    /** Casts the binding options to the given class */
+    castOptionsAs?:<T>(bindingOptions:object)=>T;
 }
 
 /**
@@ -253,6 +256,8 @@ export interface ISBFVisibleHandlerOptions extends ISBFBindingHandlerOptions{
  * Text binding handler. Use this to bind an observable to set the text content of an element.
  */
 export interface ISBFTextHandlerOptions extends ISBFBindingHandlerOptions{
+    /** If set to true, it will convert strings that contain only digits into numbers */
+    treatNumericStringsAsNumbers?:boolean;
 }
 
 /**

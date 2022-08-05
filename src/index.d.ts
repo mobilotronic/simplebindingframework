@@ -102,7 +102,7 @@ export declare class SBFManager{
      * @param localization - A localization engine.
      * @param attributeName - The attribute where to look for binding options. Default is 'data-bind-sbf'
      */
-    public static applyBindings(rootElement:Element,viewModel:any,localization?:ISBFLocalization,attributeName?:string);
+    public static applyBindings(rootElement:Element | HTMLElement | null,viewModel:any,localization?:ISBFLocalization,attributeName?:string);
 
     /**
      * Register a SBF binding handler.

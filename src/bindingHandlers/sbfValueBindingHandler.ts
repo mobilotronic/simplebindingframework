@@ -5,13 +5,7 @@ import {SBFCommon} from "../common/sbfCommon";
 export class SBFValueBindingHandler extends SBFBaseBindingHandler<ISBFValueBindingHandlerOptions>{
     //#region private
     private static twoWayBindingElements = ["INPUT","TEXTAREA","SELECT"];
-    // noinspection JSMethodCanBeStatic
-    private strToBool(value:string):boolean{
-        let result = value.toLowerCase() == "true" || value.toLowerCase() == "false";
-        if(result)
-            return value.toLowerCase() == "true";
-        return null;
-    }
+
     private notificationSubscription(value:string){
         console.debug(`Notification subscription fired from observable ${this.bindingOptions.observable.id}. New value is ${value}`);
         switch (this.element.tagName){
@@ -33,7 +27,7 @@ export class SBFValueBindingHandler extends SBFBaseBindingHandler<ISBFValueBindi
             this.bindingOptions.observable.value = (<HTMLInputElement>this.element).value;
         });
         if(this.bindingOptions.keyboardTriggersChange) {
-            let key = this.strToBool(<string>this.bindingOptions.keyboardTriggersChange) == true ? "Enter" : this.bindingOptions.keyboardTriggersChange;
+            let key = typeof this.bindingOptions.keyboardTriggersChange == "boolean" ? "Enter" : this.bindingOptions.keyboardTriggersChange;
             this.element.addEventListener("keydown", (event: KeyboardEvent) => {
                 if (event.key == key) {
                     SBFCommon.log(`Changing observable ${this.bindingOptions.observable.id} value from keyboard event`);
