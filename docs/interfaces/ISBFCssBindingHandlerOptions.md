@@ -6,6 +6,6 @@ Css binding handler options
 
 ## Hierarchy
 
-- [`ISBFGenericKeyValueHandlerOptions`](ISBFGenericKeyValueHandlerOptions.md)
+- `ISBFGenericKeyValueHandlerOptions`
 
   ↳ **`ISBFCssBindingHandlerOptions`**

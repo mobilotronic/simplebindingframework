@@ -8,19 +8,19 @@ Base interface for all binding handler options.
 
 - **`ISBFBindingHandlerOptions`**
 
-  ↳ [`ISBFValueBindingHandlerOptions`](ISBFValueBindingHandlerOptions.md)
-
-  ↳ [`ISBFTemplateHandlerOptions`](ISBFTemplateHandlerOptions.md)
-
   ↳ [`ISBFClickHandlerOptions`](ISBFClickHandlerOptions.md)
 
   ↳ [`ISBFForeachHandlerOptions`](ISBFForeachHandlerOptions.md)
 
-  ↳ [`ISBFVisibleHandlerOptions`](ISBFVisibleHandlerOptions.md)
+  ↳ [`ISBFSelectHandlerOptions`](ISBFSelectHandlerOptions.md)
+
+  ↳ [`ISBFTemplateHandlerOptions`](ISBFTemplateHandlerOptions.md)
 
   ↳ [`ISBFTextHandlerOptions`](ISBFTextHandlerOptions.md)
 
-  ↳ [`ISBFSelectHandlerOptions`](ISBFSelectHandlerOptions.md)
+  ↳ [`ISBFValueBindingHandlerOptions`](ISBFValueBindingHandlerOptions.md)
+
+  ↳ [`ISBFVisibleHandlerOptions`](ISBFVisibleHandlerOptions.md)
 
 ## Table of contents
 

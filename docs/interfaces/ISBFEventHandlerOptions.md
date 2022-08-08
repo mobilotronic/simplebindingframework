@@ -6,6 +6,6 @@ Event(s) binding handler. Use this to bind events against an element.
 
 ## Hierarchy
 
-- [`ISBFGenericKeyValueHandlerOptions`](ISBFGenericKeyValueHandlerOptions.md)
+- `ISBFGenericKeyValueHandlerOptions`
 
   ↳ **`ISBFEventHandlerOptions`**

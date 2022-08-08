@@ -12,5 +12,15 @@ export {SBFTemplateBindingHandler} from "./bindingHandlers/sbfTemplateBindingHan
 export {SBFTextBindingHandler} from "./bindingHandlers/sbfTextBindingHandler";
 export {SBFValueBindingHandler} from "./bindingHandlers/sbfValueBindingHandler";
 export {SBFVisibleBindingHandler} from "./bindingHandlers/sbfVisibleBindingHandler";
-export * from "./common/interfaces";
+export {
+    ISBFAttributeHandlerOptions, ISBFBindingHandlerOptions, ISBFBindingHandlerRepositoryItem,
+    ISBFClickHandlerOptions, ISBFComputedObservable,
+    ISBFCssBindingHandlerOptions,
+    ISBFEventHandlerOptions,
+    ISBFForeachHandlerOptions,
+    ISBFLocalization, ISBFObservable, ISBFObservableOptions, ISBFSelectHandlerOptions, ISBFTemplateHandlerOptions,
+    ISBFTextHandlerOptions,
+    ISBFValueBindingHandlerOptions,
+    ISBFVisibleHandlerOptions, NotificationSubscription,ISBFBindingHandlersRepository,ISBFValidationRule
+} from "./common/interfaces";
 
