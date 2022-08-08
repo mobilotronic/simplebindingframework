@@ -1,4 +1,4 @@
-[Simple binding framework](README.md) / Exports
+[Simple binding framework](index.md) / Exports
 
 # Simple binding framework
 
