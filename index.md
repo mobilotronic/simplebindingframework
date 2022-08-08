@@ -1,3 +1,5 @@
+Simple binding framework / [Exports](modules.md)
+
 # Simple binding framework (SBF)
 Simple binding framework is a small JavaScript library that helps you build data-driven web applications.
 
@@ -27,7 +29,6 @@ will:
 * Add a placeholder attribute `Type Search` as value
 * Bind the `TitleAttribute` observable,of the current binding context, against the `title` attribute.
 * Will add a `keydown` event and bind it to the `inputSearchKeyDown` method of the current binding context.
-
 
 ### Two-way binding
 Two-way binding simply means that an SBF observable can be updated both programmatically and UI driven changes.
