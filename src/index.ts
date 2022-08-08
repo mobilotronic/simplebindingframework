@@ -12,4 +12,5 @@ export {SBFTemplateBindingHandler} from "./bindingHandlers/sbfTemplateBindingHan
 export {SBFTextBindingHandler} from "./bindingHandlers/sbfTextBindingHandler";
 export {SBFValueBindingHandler} from "./bindingHandlers/sbfValueBindingHandler";
 export {SBFVisibleBindingHandler} from "./bindingHandlers/sbfVisibleBindingHandler";
+export * from "./common/interfaces";
 

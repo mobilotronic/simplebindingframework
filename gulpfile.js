@@ -17,7 +17,7 @@ const configuration = {
 const gulp = require("gulp");
 const ts = require("gulp-typescript");
 const fsExtra = require("fs-extra");
-const shellCmd = require("child_process").spawn;
+const shellCmd = require("node:child_process").spawn;
 const gulpBump = require("gulp-bump");
 const verdaccio = "http://localhost:4873";
 
@@ -25,7 +25,8 @@ const verdaccio = "http://localhost:4873";
 //#region shell commands
 function runCommand(command,parameters,ignoreError){
     return new Promise((resolve,reject)=>{
-        let result = shellCmd(command,parameters,{stdio:'pipe'});
+        //added shell:true to work with windows.
+        let result = shellCmd(command,parameters,{stdio:'pipe',shell:true});
         result.on('error',(error)=>{ console.error(error);reject();});
         result.on('exit',(code,signal)=>{
             if(ignoreError == true)
@@ -111,7 +112,7 @@ function incrementPatch(){
     return runCommand("npm",["version","--no-git-tag-version","patch"]);
 }
 async function publishToVerdaccio(){
-    process.chdir("build/production");
+    process.chdir("./build/production");
     // try {
     //     //await incrementPatch();//runCommand("npm", ["unpublish", "--force", "--registry", verdaccio]);
     // }
@@ -128,7 +129,7 @@ async function publishToVerdaccio(){
  * Outputs in a separate folder for testing purposes.
  */
 gulp.task("buildProduction", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles]));
-gulp.task("publishToVerdaccio", gulp.series([incrementPatch,"buildProduction",publishToVerdaccio]));
+gulp.task("publishToVerdaccio", gulp.series([publishToVerdaccio]));
 
 gulp.task("compileTS", gulp.series([compileTS]));
 gulp.task("publishMajor",gulp.series([incrementMajor,"buildProduction"]));
