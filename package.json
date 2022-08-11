@@ -1,6 +1,6 @@
 {
   "name": "@mobilotronic/sbf",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Simple binding framework",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "ts-node": "^9.1.1",
     "typedoc": "^0.23.10",
     "typedoc-plugin-markdown": "^3.13.4",
-    "typedoc-github-wiki-theme": "^1.0.1"
+    "typedoc-github-wiki-theme": "^1.0.1",
+    "edit-json-file": "^1.7.0"
   },
   "scripts": {
     "build": "gulp -b --color --gulpfile gulpfile.js buildProduction",

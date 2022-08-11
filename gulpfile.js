@@ -18,8 +18,8 @@ const gulp = require("gulp");
 const ts = require("gulp-typescript");
 const fsExtra = require("fs-extra");
 const shellCmd = require("node:child_process").spawn;
-const gulpBump = require("gulp-bump");
 const verdaccio = "http://localhost:4873";
+const editJsonFile = require("edit-json-file");
 
 
 //#region shell commands
@@ -99,6 +99,22 @@ function compileTS() {
         .js
         .pipe(gulp.dest("./"));
 }
+
+function cleanProductionJSON(){
+    return new Promise((resolve,reject)=>{
+        try{
+            let file = editJsonFile(`build/production/package.json`);
+            file.unset("devDependencies");
+            file.unset("scripts");
+            file.save();
+            resolve();
+        }
+        catch (e) {
+            reject(e);
+        }
+    });
+
+}
 //#endregion
 
 //#region version helper methods
@@ -128,7 +144,7 @@ async function publishToVerdaccio(){
 /**
  * Outputs in a separate folder for testing purposes.
  */
-gulp.task("buildProduction", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles]));
+gulp.task("buildProduction", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles,cleanProductionJSON]));
 gulp.task("publishToVerdaccio", gulp.series([publishToVerdaccio]));
 
 gulp.task("compileTS", gulp.series([compileTS]));
