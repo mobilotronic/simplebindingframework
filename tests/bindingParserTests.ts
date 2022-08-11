@@ -201,7 +201,7 @@ describe("Binding parser tests",()=>{
             // let bindingsParser = new SBFBindingsParser();
             // let bindingOptions = bindingsParser.parseBindingOptions(eventsBindingString,SBFBindingHandlersRepository,viewModel);
             try{
-                SBFManager.applyBindings(document.getElementById("bindingRoot"),viewModel);
+                SBFManager.applyBindings(<HTMLElement>document.getElementById("bindingRoot"),viewModel);
                 let tbody = document.querySelector("tbody");
                 if(tbody){
                     assert.equal(tbody.querySelectorAll("tr").length,2);
@@ -241,7 +241,7 @@ describe("Binding parser tests",()=>{
             try{
                 element[SBF_CURRENT_BINDING_CONTEXT] = viewModel;
                 let bindingHandler = new SBFVisibleBindingHandler(element, bindingOptions["visible"]);
-                assert.equal(bindingHandler.bindingOptions.observable.value,true);
+                assert.equal( bindingHandler.bindingOptions.observable ? bindingHandler.bindingOptions.observable.value : false,true);
                 resolve();
             }
             catch (error){
@@ -258,7 +258,7 @@ describe("Binding parser tests",()=>{
             try{
                 element[SBF_CURRENT_BINDING_CONTEXT] = viewModel;
                 let bindingHandler = new SBFTextBindingHandler(element, bindingOptions["text"]);
-                assert.equal(bindingHandler.bindingOptions.observable.value,"Hello");
+                assert.equal(bindingHandler.bindingOptions.observable ? bindingHandler.bindingOptions.observable.value : "Not Hello","Hello");
                 resolve();
             }
             catch (error){
