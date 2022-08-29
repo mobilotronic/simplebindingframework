@@ -12,7 +12,7 @@ It has build in support for validation and localization, which makes it easy to 
 * Built-in validation
 * Localization support
 
-### Declarative binding
+## Declarative binding
 Using declarative binding, you can have multiple bindings against an element.
 
 For example a binding declaration like the following
@@ -29,26 +29,26 @@ will:
 * Will add a `keydown` event and bind it to the `inputSearchKeyDown` method of the current binding context.
 
 
-### Two-way binding
+## Two-way binding
 Two-way binding simply means that an SBF observable can be updated both programmatically and UI driven changes.
 
-### Default binding handlers
+## Default binding handlers
 There is a number of default binding handlers, that would most likely be enough for an average application.
 
-#### Attribute binding handler
+### Attribute binding handler
 Add/removes attributes to an element. If the given values are SBF observables, it will update attribute values automatically.
 
 `data-bind-sbf="attr:{placeholder:SearchPlaceHolder}"`
 
 If the attribute bound value is `null`, the attribute will be removed.
 
-#### Click binding handler
+### Click binding handler
 As the name implies, this is really a convenience to add a `click` listener to an element.
 `data-bind-sbf="click:Search`
 
 Same can be achieved using the events binding handler.
 
-#### Css binding handler
+### Css binding handler
 Use this to dynamically add/remove css classes to an element.
 
 `data-bind-sbf="css:{input-invalid:IsInputSearchInvalid}"`
@@ -57,12 +57,12 @@ The bound SBF observable must be of type `boolean`. It will add a class if the b
 
 In the example above, the class `input-invalid` will be added to the element if the `IsInputSearchInvalid` is true.
 
-#### Event binding handler
+### Event binding handler
 A binding handler for adding event listeners to an element.
 
 `data-bind-sbf="events:{keydown:inputSearchKeyDown}"`
 
-#### ForEach binding handler
+### ForEach binding handler
 `ForEach` binding is a quite powerful binding handler, as it can render dynamically DOM elements, driven by an array of arbitrary objects.
 
 The `foreach` binding is taking the 1st child element of the element that is bound to and uses that as template, to render the associated data.
@@ -99,29 +99,29 @@ It will iterate through all data in the `shops` table and render a `tr` for each
 
 If there are any nested `foreach` declarations the same flow/logic will be applied.
 
-#### Select binding handler
+### Select binding handler
 A binding handler specifically for `select` elements.
 
 `data-bind-sbf="select:{data:ResultPages,value:CurrentPage}"`
 
-#### Template binding handler
+### Template binding handler
 Another powerful binding handler, as it can render dynamically DOM elements driven by an array of arbitrary objects.
 
 `data-bind-sbf="template:{name:searchResultsTemplate,foreachData:SearchResults}"`
 
 In the example above, the handler will look for an `HTMLTemplateElement` with an id of `searchResultsTemplate` and render  its contents
 
-#### Text binding handler
+### Text binding handler
 A binding handler that sets the value of the `textContent` of the bound element.
 
 `data-bind-sbf="text:About"`
 
-#### Value binding handler
+### Value binding handler
 A binding handler specifically for `input` or `textarea` elements.
 
 `data-bind-sbf="value:{observable:SearchValue,keyboardTriggersChange:true}"`
 
-#### Visible binding handler
+### Visible binding handler
 A binding handler to control the visibility of an element.
 
 `data-bind-sbf="visible:CanShowElement"`
