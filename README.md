@@ -1,4 +1,4 @@
-# Simple binding framework (SBF)
+# Simple binding framework (SBF) ![sbf_logo](./content/sbf_logo.PNG)
 Simple binding framework is a small JavaScript library that helps you build data-driven web applications.
 
 Using observables and two-way binding it can auto-magically update the UI, without the need of writing explicit code for updating the DOM.

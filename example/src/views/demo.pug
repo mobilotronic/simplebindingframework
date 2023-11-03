@@ -1,0 +1,129 @@
+extends _Layout
+
+block styles
+
+block scripts
+    script(src="lib/all.js")
+    script(src="modules/demo.js")
+block content
+    .container
+        .py-5.text-center
+            img.d-block.mx-auto.mb-4(src='https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg', alt='', width='72', height='72')
+            h2 Checkout form
+            p.lead
+            | Below is an example form built entirely with Bootstrap&apos;s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.
+        .row
+            .col-md-4.order-md-2.mb-4
+                h4.d-flex.justify-content-between.align-items-center.mb-3
+                    span.text-muted Your cart
+                    span.badge.badge-secondary.badge-pill 3
+                ul.list-group.mb-3
+                    li.list-group-item.d-flex.justify-content-between.lh-condensed
+                        div
+                            h6.my-0 Product name
+                            small.text-muted Brief description
+                        span.text-muted $12
+                    li.list-group-item.d-flex.justify-content-between.lh-condensed
+                        div
+                            h6.my-0 Second product
+                            small.text-muted Brief description
+                        span.text-muted $8
+                    li.list-group-item.d-flex.justify-content-between.lh-condensed
+                        div
+                            h6.my-0 Third item
+                            small.text-muted Brief description
+                        span.text-muted $5
+                    li.list-group-item.d-flex.justify-content-between.bg-light
+                        .text-success
+                            h6.my-0 Promo code
+                            small EXAMPLECODE
+                        span.text-success -$5
+                    li.list-group-item.d-flex.justify-content-between
+                        span Total (USD)
+                        strong $20
+                form.card.p-2
+                    .input-group
+                        input.form-control(type='text', placeholder='Promo code')
+                        .input-group-append
+                            button.btn.btn-secondary(type='submit') Redeem
+            .col-md-8.order-md-1
+                h4.mb-3 Billing address
+                form.needs-validation(novalidate='')
+                    .row
+                        .col-md-6.mb-3
+                            label(for='firstName') First name
+                            input#firstName.form-control(data-bind-sbf="value:FirstName",type='text', placeholder='', value='', required='')
+                        .col-md-6.mb-3
+                            label(for='lastName') Last name
+                            input#lastName.form-control(data-bind-sbf="value:LastName",type='text', placeholder='', value='', required='')
+                    .mb-3
+                        label(for='username') Username
+                        .input-group
+                            .input-group-prepend
+                            span.input-group-text @
+                            input#username.form-control(data-bind-sbf="value:UserName",type='text', placeholder='Username', required='')
+                    .mb-3
+                        label(for='email')
+                            | Email 
+                            span.text-muted (Optional)
+                        input#email.form-control(data-bind-sbf="value:Email",type='email', placeholder='you@example.com')
+                    .mb-3
+                        label(for='address') Address
+                        input#address.form-control(data-bind-sbf="value:Address",type='text', placeholder='1234 Main St', required='')
+                    .mb-3
+                        label(for='address2')
+                            | Address 2 
+                            span.text-muted (Optional)
+                        input#address2.form-control(data-bind-sbf="value:Address2",type='text', placeholder='Apartment or suite')
+                    .row
+                        .col-md-5.mb-3
+                            label(for='country') Country
+                            select#country.custom-select.d-block.w-100(class="form-select",data-bind-sbf="select:{data:Countries,valueField:code,displayField:name,value:SelectedCountry,selectionLabel:Select a country,$validationRules:[{name:'required'}]}",required='')
+                        .col-md-4.mb-3
+                            label(for='city') City
+                            select#city.custom-select.d-block.w-100(class="form-select",data-bind-sbf="select:{data:Cities,valueField:city,displayField:city,value:SelectedCity,selectionLabel:Select a city}",required='')
+                        .col-md-3.mb-3
+                            label(for='zip') Zip
+                            input#zip.form-control(data-bind-sbf="value:ZipCode",type='text', placeholder='', required='')
+                    hr.mb-4
+                    .custom-control.custom-checkbox.form-check
+                        input#same-address.custom-control-input(class="form-check-input",type='checkbox')
+                        label.custom-control-label(class="form-check-label",for='same-address') Shipping address is the same as my billing address
+                    .custom-control.custom-checkbox.form-check
+                        input#save-info.custom-control-input(class="form-check-input",type='checkbox')
+                        label.custom-control-label(class="form-check-label",for='save-info') Save this information for next time
+                    hr.mb-4
+                    h4.mb-3 Payment
+                    .d-block.my-3
+                    .custom-control.custom-radio.form-check
+                        input#credit.custom-control-input.form-check-input(name='paymentMethod', type='radio', checked='', required='')
+                        label.custom-control-label.form-check-label(for='credit') Credit card
+                    .custom-control.custom-radio.form-check
+                        input#debit.custom-control-input.form-check-input(name='paymentMethod', type='radio', required='')
+                        label.custom-control-label.form-check-label(for='debit') Debit card
+                    .row
+                        .col-md-6.mb-3
+                            label(for='cc-name') Name on card
+                            input#cc-name.form-control(data-bind-sbf="value:CardHolderName",type='text', placeholder='', required='')
+                            small.text-muted Full name as displayed on card
+                        .col-md-6.mb-3
+                            label(for='cc-number') Credit card number
+                            input#cc-number.form-control(data-bind-sbf="value:CardNumber",type='text', placeholder='', required='')
+                    .row
+                        .col-md-3.mb-3
+                            label(for='cc-expiration') Expiration
+                            input#cc-expiration.form-control(data-bind-sbf="value:Expiration",type='date', placeholder='', required='')
+                        .col-md-3.mb-3
+                            label(for='cc-expiration') CVV
+                            input#cc-cvv.form-control(data-bind-sbf="value:CVV",type='text', placeholder='', required='')
+                    hr.mb-4
+                    button.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
+        footer.my-5.pt-5.text-muted.text-center.text-small
+            p.mb-1 &copy; 2017-2018 Company Name
+            ul.list-inline
+            li.list-inline-item
+                a(href='#') Privacy
+            li.list-inline-item
+                a(href='#') Terms
+            li.list-inline-item
+                a(href='#') Support

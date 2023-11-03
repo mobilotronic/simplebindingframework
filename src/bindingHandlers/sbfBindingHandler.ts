@@ -1,5 +1,5 @@
 import {ISBFBindingHandlerOptions, ISBFLocalization, ISBFObservable} from "../common/interfaces";
-import {SBF_CURRENT_BINDING_CONTEXT, SBFReservedWordDictionary} from "../common/sbfCommon";
+import {SBF_CURRENT_BINDING_CONTEXT, SBFReservedWordDictionary, SBFCommon} from "../common/sbfCommon";
 
 export class SBFBaseBindingHandler<T>{
     //#region protected
@@ -30,8 +30,20 @@ export class SBFBaseBindingHandler<T>{
                 return value;
         }
         catch (e){
-            console.debug(e);
-            throw e;
+            SBFCommon.throwError("error",e);
+        }
+    }
+    /**
+     * If the binding options have validation rules, ensure they are added to the observable.
+     */
+    protected processValidationRules(){
+        if(this._bindingHandlerOptions['isBindingHandlerOptionsObject']){
+            let castedOptions = <ISBFBindingHandlerOptions>this._bindingHandlerOptions;
+            if(Array.isArray(castedOptions.validationRules) && (castedOptions.observable && castedOptions.observable.isObservable)){
+                castedOptions.validationRules.forEach((r)=>{
+                    castedOptions.observable.addValidationRule(r);
+                });
+            }
         }
     }
     //#endregion
@@ -53,6 +65,7 @@ export class SBFBaseBindingHandler<T>{
             this.mutationObserver = new MutationObserver(this.mutationCallback);
             this.mutationObserver.observe(this.element.parentNode, {childList: true, subtree: true});
         }
+        this.processValidationRules();
         this.localization = localization;
     }
     //#endregion

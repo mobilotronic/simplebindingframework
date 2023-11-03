@@ -17,6 +17,7 @@ Click binding handler. Use this to bind a click event listener against an elemen
 - [click](ISBFClickHandlerOptions.md#click)
 - [isBindingHandlerOptionsObject](ISBFClickHandlerOptions.md#isbindinghandleroptionsobject)
 - [observable](ISBFClickHandlerOptions.md#observable)
+- [validationRules](ISBFClickHandlerOptions.md#validationrules)
 
 ## Properties
 
@@ -57,8 +58,20 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
 
 #### Inherited from
 
 [ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[observable](ISBFBindingHandlerOptions.md#observable)
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.
+
+#### Inherited from
+
+[ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[validationRules](ISBFBindingHandlerOptions.md#validationrules)

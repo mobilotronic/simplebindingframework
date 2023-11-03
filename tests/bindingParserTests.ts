@@ -13,12 +13,13 @@ import * as fs from "fs";
 import * as path from "path";
 import {SBFVisibleBindingHandler} from "../src";
 import {SBFTextBindingHandler} from "../src";
-import {ISBFClickHandlerOptions, ISBFForeachHandlerOptions, ISBFSelectHandlerOptions} from "../src/common/interfaces";
+import {ISBFClickHandlerOptions, ISBFForeachHandlerOptions, ISBFLocalization, ISBFSelectHandlerOptions} from "../src/common/interfaces";
 import {SBFSelectBindingHandler} from "../src";
 import {SBFManager} from "../src";
 import {ISBFValueBindingHandlerOptions} from "../src/common/interfaces";
 
 const DOM = new JSDOM(fs.readFileSync(path.join(__dirname,"./SBFTestPage.html"),"utf8"));
+const locales = require('./sbf.Tests.json');
 // @ts-ignore
 // noinspection JSConstantReassignment
 global.window = DOM.window;
@@ -196,13 +197,22 @@ describe("Binding parser tests",()=>{
             }
         });
     });
-    it("Single Template binding string",()=>{
+    it("Single Template/Localization binding string",()=>{
         return new Promise<void>((resolve,reject)=>{
             // let bindingsParser = new SBFBindingsParser();
             // let bindingOptions = bindingsParser.parseBindingOptions(eventsBindingString,SBFBindingHandlersRepository,viewModel);
             try{
-                SBFManager.applyBindings(<HTMLElement>document.getElementById("bindingRoot"),viewModel);
+                let translator = <ISBFLocalization>{translate:(key:string)=>{
+                        let splitted = key.split("@");
+                        return locales[splitted[1]];
+                    }
+                };
+                SBFManager.applyBindings(<HTMLElement>document.getElementById("bindingRoot"),viewModel,translator);
                 let tbody = document.querySelector("tbody");
+                let thead = document.querySelector("thead");
+                if(thead){//testing localization
+                    assert.equal(thead.querySelectorAll("th")[0].getAttribute("title"),"Id");
+                }
                 if(tbody){
                     assert.equal(tbody.querySelectorAll("tr").length,2);
                     assert.equal(tbody.querySelectorAll("tr")[0].querySelectorAll("td").length,3);

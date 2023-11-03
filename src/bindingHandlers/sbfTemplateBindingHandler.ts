@@ -39,7 +39,7 @@ export class SBFTemplateBindingHandler extends SBFBaseBindingHandler<ISBFTemplat
             newNode[SBF_PARENT_BINDING_CONTEXT] = this.element[SBF_CURRENT_BINDING_CONTEXT];
             newNode[SBF_SKIP_CONTEXT_BINDING] = true;
             //if a binding viewmodel was given, then use that. otherwise fallback to use the parent binding context.
-            SBFManager.applyBindings(newNode,this.bindingOptions.bindingViewModel ? this.bindingOptions.bindingViewModel : newNode[SBF_PARENT_BINDING_CONTEXT]);
+            SBFManager.applyBindings(newNode,this.bindingOptions.bindingViewModel ? this.bindingOptions.bindingViewModel : newNode[SBF_PARENT_BINDING_CONTEXT],this.localization);
             this.element.appendChild(newNode);
         }
         if(this.bindingOptions.foreachData && !Array.isArray(this.bindingOptions.foreachData)){

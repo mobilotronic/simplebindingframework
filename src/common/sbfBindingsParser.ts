@@ -2,11 +2,13 @@ import {
     ISBFBindingHandlerOptions,
     ISBFBindingHandlerRepositoryItem,
     ISBFBindingHandlersRepository,
-    ISBFDictionary, ISBFTextHandlerOptions
+    ISBFDictionary, ISBFTextHandlerOptions, ISBFValidationRule
 } from "./interfaces";
-import {SBF_PARENT_BINDING_CONTEXT, SBFCommon, SBFReservedWordDictionary} from "./sbfCommon";
+import {SBF_PARENT_BINDING_CONTEXT, SBFCommon, SBFReservedWordDictionary,isBindingHandlerOptionsObject,isSBFReservedObject} from "./sbfCommon";
+import {defaultRuleRepository} from "./sbfObservable";
 
 const boolRegEx = new RegExp(/true|false|yes|no/ig);
+
 
 // noinspection JSUnfilteredForInLoop
 export class SBFBindingsParser {
@@ -17,6 +19,7 @@ export class SBFBindingsParser {
         let curlyBraceStarted = false;
         let curlyBraceEnded = true;
         let result = [];
+        //iterate through the binding string, taking into account curly braces.
         for (let i = 0; i <= bindingString.length - 1; i++) {
             if (bindingString[i] == "{") {
                 curlyBraceStarted = true;
@@ -30,11 +33,13 @@ export class SBFBindingsParser {
                 commaIndexes.push(i);
             }
         }
+        //finally add the length of the string, so the last comma can be processed.
+        commaIndexes.push(bindingString.length);
         commaIndexes.forEach((commaIndex, arrayIndex, theArray) => {
             if (arrayIndex == 0) {
-                result.push(bindingString.substring(0, commaIndex+1));
+                result.push(bindingString.substring(0, commaIndex));
             } else {
-                result.push(bindingString.substring(theArray[arrayIndex - 1] + 1, commaIndex - (theArray[arrayIndex - 1] + 1)));
+                result.push(bindingString.substring(theArray[arrayIndex -1] + 1, commaIndex));
             }
         });
         result.push(bindingString.substring(commaIndexes[commaIndexes.length - 1] + 1));
@@ -42,12 +47,28 @@ export class SBFBindingsParser {
     }
 
     // noinspection JSMethodCanBeStatic
-    private isBindingStringBindingOptionsObject(bindingString: string): boolean {
+    private isBindingStringObject(bindingString: string): boolean {
         return typeof bindingString == "string" && bindingString[0] == "{" && bindingString[bindingString.length - 1] == "}";
     }
 
-    private isSubBindingStringBindingOptionsObject(bindingString: string): boolean {
+    private isSubBindingStringObject(bindingString: string): boolean {
         return typeof bindingString == "string" && bindingString.indexOf("{") == bindingString.indexOf(":") + 1 && bindingString[bindingString.length - 1] == "}";
+    }
+
+    private processValidationRules(bindingString:string) : Array<ISBFValidationRule>{
+        //first take out the array square braces
+        let validationRulesString = bindingString.replace("[","").replace("]","");
+        //then get each validation rule, by splitting the string by comma
+        let validationRules = validationRulesString.split(",");
+        let result = [];
+        validationRules.forEach((validationRuleString)=>{
+            let validationRule = validationRulesString.replace('{','').replace('}','').replace("'",'').replace("'","").split(':');
+            if(defaultRuleRepository[validationRule[1]]){
+                result.push(defaultRuleRepository[validationRule[1]]);
+            }
+        });
+        result[isSBFReservedObject] = true;
+        return result;
     }
 
     /**
@@ -60,22 +81,38 @@ export class SBFBindingsParser {
         // if the string starts with curly braces, it is assumed to be a complex structure/object.
         let splitProperties = (bindingString.indexOf("{") >= 0 || bindingString.indexOf("}") >= 0) ? this.customSplit(bindingString) : bindingString.split(",");
         splitProperties.forEach((p) => {
-            //if the sub string is an object, then iterate through its properties.
-            if (this.isSubBindingStringBindingOptionsObject(p)) {
-                //using recursion to parse all the sub properties.
-                let subBindingProperty = p.substring(0, p.indexOf(":")+1);
-                result[subBindingProperty] = this.bindingStringToObject(p.substring(p.indexOf(":") + 1));
-            } else {
+            if(SBFReservedWordDictionary.stringHasReservedWord(p)){
                 let prop = p.split(":");
-                let propValue = prop[1];
-                let convertedValue = null;
-                if(typeof propValue == "string"){
-                    // converting boolean strings to actual boolean values.
-                    if(boolRegEx.test(propValue)){
-                        convertedValue = (propValue.toLowerCase() == 'true' || propValue.toLowerCase() == 'yes');
+                //if the binding string has validation Rules.
+                if(p.indexOf(SBFReservedWordDictionary.$validationRules) >= 0){
+                    let validationRules = this.processValidationRules(p.substring(p.indexOf(":")+1));
+                    if(validationRules.length > 0){
+                        result[SBFReservedWordDictionary.$validationRules.replace('$','')] = validationRules;
                     }
                 }
-                result[prop[0]] = convertedValue ? convertedValue : propValue;
+                //if the binding string is a localization string
+                if(p.indexOf(SBFReservedWordDictionary.$localization) >= 0){
+                    result[prop[0]] = prop[1];
+                }
+            }
+            else{
+                //if the sub string is an object, then iterate through its properties.
+                if (this.isSubBindingStringObject(p)) {
+                    //using recursion to parse all the sub properties.
+                    let subBindingProperty = p.substring(0, p.indexOf(":")+1);
+                    result[subBindingProperty] = this.bindingStringToObject(p.substring(p.indexOf(":") + 1));
+                } else {
+                    let prop = p.split(":");
+                    let propValue = prop[1];
+                    let convertedValue = null;
+                    if(typeof propValue == "string"){
+                        // converting boolean strings to actual boolean values.
+                        if(boolRegEx.test(propValue)){
+                            convertedValue = (propValue.toLowerCase() == 'true' || propValue.toLowerCase() == 'yes');
+                        }
+                    }
+                    result[prop[0]] = convertedValue ? convertedValue : propValue;
+                }
             }
         });
         return result;
@@ -120,6 +157,9 @@ export class SBFBindingsParser {
     }
 
     private stringBindingOptionToValue(optionValue: string, bindingContext: any, element: Element, convertTextToNumber: boolean): any {
+        //if the binding option string is a localization string, leave it as is.
+        if(optionValue.indexOf(SBFReservedWordDictionary.$localization)>=0)
+            return optionValue;
         //if the binding value has a dot in it, assume it's a sub property of the bindingContext.
         let result = optionValue.indexOf(".") >= 0 ? this.dottedBindingOptionToValue(optionValue, bindingContext, element) :
             bindingContext[optionValue] ? bindingContext[optionValue] : optionValue;
@@ -150,7 +190,7 @@ export class SBFBindingsParser {
     private bindingStringToBindingHandlerOptions<BindingOptions>(bindingHandlerOptions: string, bindingContext: any, bindingHandlerRepositoryItem: ISBFBindingHandlerRepositoryItem, element: Element): BindingOptions {
         //if the binding string is in object/verbose format, meaning within curly braces, then
         //make it an object and use it. if not format it first before using it.
-        let options = this.isBindingStringBindingOptionsObject(bindingHandlerOptions) ? this.bindingStringToObject(bindingHandlerOptions) :
+        let options = this.isBindingStringObject(bindingHandlerOptions) ? this.bindingStringToObject(bindingHandlerOptions) :
             this.bindingStringToObject(bindingHandlerRepositoryItem.formatBindingOptions(bindingHandlerOptions));
         let convertTextToNumber = false;
         if (bindingHandlerRepositoryItem.castOptionsAs) {
@@ -160,12 +200,16 @@ export class SBFBindingsParser {
         for (let opt in options) {
             let propertyType = typeof options[opt];
             switch (propertyType) {
-                case "object": {this.objectBindingOptionToValue(options[opt], bindingContext, element, convertTextToNumber);break;}
+                case "object": {
+                    if(!options[opt][isSBFReservedObject])
+                        this.objectBindingOptionToValue(options[opt], bindingContext, element, convertTextToNumber);
+                    break;
+                }
                 case "string": { options[opt] = this.stringBindingOptionToValue(options[opt], bindingContext, element, convertTextToNumber);break;}
                 default:{}
             }
         }
-        options["isBindingHandlerOptionsObject"] = true;
+        options[isBindingHandlerOptionsObject] = true;
         return options;
     }
 

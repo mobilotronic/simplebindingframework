@@ -1,0 +1,47 @@
+{
+    "name": "@mobilotronic/sbf-example",
+    "version": "1.0.13",
+    "description": "Simple binding framework example",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mobilotronic/simplebindingframework.git"
+    },
+    "keywords": [
+      "ui",
+      "binding",
+      "framework",
+      "templates",
+      "observables"
+    ],
+    "author": "mobilotronic",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/mobilotronic/simplebindingframework/issues"
+    },
+    "homepage": "https://github.com/mobilotronic/simplebindingframework#readme",
+    "devDependencies": {
+      "typescript": "4.1.3",
+      "webpack": "5.74.0",
+      "webpack-cli": "4.10.0",
+      "webpack-stream": "7.0.0",
+      "css-loader": "6.7.1",
+      "file-loader": "6.2.0",
+      "style-loader": "3.3.1",
+      "@types/express":"4.17.14",
+      "gulp": "4.0.2"
+    },
+    "dependencies": {
+        "express":"4.18.1",
+        "i18next":"21.9.2",
+        "i18next-http-backend":"1.4.4",
+        "pug":"3.0.2",
+        "bootstrap-css-only":"4.4.1",
+        "@mobilotronic/sbf": "1.0.14",
+        "helmet":"6.0.0"
+    },
+    "scripts": {
+      "serve":"node src/output/startup.js --watch",
+      "buildWebPack":"gulp -b --color --gulpfile gulpfile.js buildWebPack"
+    }
+  }
+  

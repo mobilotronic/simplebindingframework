@@ -27,6 +27,7 @@ A computed observable is an observable, that has a calculated/computed value, ba
 
 - [addDependency](ISBFComputedObservable.md#adddependency)
 - [addNotificationSubscription](ISBFComputedObservable.md#addnotificationsubscription)
+- [addValidationRule](ISBFComputedObservable.md#addvalidationrule)
 - [errorWhenInvalid](ISBFComputedObservable.md#errorwheninvalid)
 - [id](ISBFComputedObservable.md#id)
 - [isObservable](ISBFComputedObservable.md#isobservable)
@@ -76,9 +77,9 @@ Adds a notification subscription. Consumers can use this to track value changes.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | [`NotificationSubscription`](../modules.md#notificationsubscription)<`T`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`NotificationSubscription`](../modules.md#notificationsubscription)<`T`\> | The notification subscription. |
 
 ##### Returns
 
@@ -87,6 +88,32 @@ Adds a notification subscription. Consumers can use this to track value changes.
 #### Inherited from
 
 [ISBFObservable](ISBFObservable.md).[addNotificationSubscription](ISBFObservable.md#addnotificationsubscription)
+
+___
+
+### addValidationRule
+
+• **addValidationRule**: (`value`: [`ISBFValidationRule`](ISBFValidationRule.md)) => `void`
+
+#### Type declaration
+
+▸ (`value`): `void`
+
+Adds a validation rule for the observable.
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`ISBFValidationRule`](ISBFValidationRule.md) | The validation rule. |
+
+##### Returns
+
+`void`
+
+#### Inherited from
+
+[ISBFObservable](ISBFObservable.md).[addValidationRule](ISBFObservable.md#addvalidationrule)
 
 ___
 

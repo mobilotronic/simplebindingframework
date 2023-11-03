@@ -43,6 +43,7 @@ A computed observable is an observable, that has a calculated/computed value, ba
 
 - [addDependency](SBFComputedObservable.md#adddependency)
 - [addNotificationSubscription](SBFComputedObservable.md#addnotificationsubscription)
+- [addValidationRule](SBFComputedObservable.md#addvalidationrule)
 - [dispose](SBFComputedObservable.md#dispose)
 - [isValid](SBFComputedObservable.md#isvalid)
 
@@ -232,7 +233,7 @@ If there are more than one dependencies, the method will be invoked for each val
 
 #### Implementation of
 
-ISBFComputedObservable.addDependency
+[ISBFComputedObservable](../interfaces/ISBFComputedObservable.md).[addDependency](../interfaces/ISBFComputedObservable.md#adddependency)
 
 ___
 
@@ -254,11 +255,37 @@ Adds a notification subscription. Consumers can use this to track value changes.
 
 #### Implementation of
 
-ISBFComputedObservable.addNotificationSubscription
+[ISBFComputedObservable](../interfaces/ISBFComputedObservable.md).[addNotificationSubscription](../interfaces/ISBFComputedObservable.md#addnotificationsubscription)
 
 #### Inherited from
 
 [SBFObservable](SBFObservable.md).[addNotificationSubscription](SBFObservable.md#addnotificationsubscription)
+
+___
+
+### addValidationRule
+
+▸ **addValidationRule**(`value`): `void`
+
+Adds a validation rule.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`ISBFValidationRule`](../interfaces/ISBFValidationRule.md) | The validation rule. |
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+[ISBFComputedObservable](../interfaces/ISBFComputedObservable.md).[addValidationRule](../interfaces/ISBFComputedObservable.md#addvalidationrule)
+
+#### Inherited from
+
+[SBFObservable](SBFObservable.md).[addValidationRule](SBFObservable.md#addvalidationrule)
 
 ___
 

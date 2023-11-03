@@ -13,7 +13,7 @@ import {SBFCommon} from "./sbfCommon";
 // noinspection RegExpRedundantEscape
 const emailRegEx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 // noinspection JSUnusedLocalSymbols
-const defaultRuleRepository={
+export const defaultRuleRepository={
     "email":<ISBFValidationRule>{validate:(currentValue,ruleComparisonValue)=>{return emailRegEx.test(currentValue);}},
     "min":<ISBFValidationRule>{validate:(currentValue,ruleComparisonValue)=>{
             if(typeof currentValue == "number" && typeof ruleComparisonValue == "number")
@@ -138,6 +138,17 @@ export class SBFObservable<T> implements ISBFObservable<T>{
     addNotificationSubscription(notificationSubscription:NotificationSubscription<T>){
         if(notificationSubscription)
             this.subscriptions.push(notificationSubscription);
+    }
+    /**
+     * Adds a validation rule.
+     * @param value - The validation rule.
+     */
+    addValidationRule(value: ISBFValidationRule){
+        if(value){
+            if(!this.options.validationRules)
+                this.options.validationRules = [];
+            this.options.validationRules.push(value);
+        }
     }
     /**
      * Observable's options.

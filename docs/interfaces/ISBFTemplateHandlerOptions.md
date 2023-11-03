@@ -20,6 +20,7 @@ Template binding handler options.
 - [isBindingHandlerOptionsObject](ISBFTemplateHandlerOptions.md#isbindinghandleroptionsobject)
 - [name](ISBFTemplateHandlerOptions.md#name)
 - [observable](ISBFTemplateHandlerOptions.md#observable)
+- [validationRules](ISBFTemplateHandlerOptions.md#validationrules)
 
 ## Properties
 
@@ -79,8 +80,20 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
 
 #### Inherited from
 
 [ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[observable](ISBFBindingHandlerOptions.md#observable)
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.
+
+#### Inherited from
+
+[ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[validationRules](ISBFBindingHandlerOptions.md#validationrules)
