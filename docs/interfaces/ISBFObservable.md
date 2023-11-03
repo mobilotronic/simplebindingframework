@@ -25,6 +25,7 @@ The SBFObservable.
 ### Properties
 
 - [addNotificationSubscription](ISBFObservable.md#addnotificationsubscription)
+- [addValidationRule](ISBFObservable.md#addvalidationrule)
 - [errorWhenInvalid](ISBFObservable.md#errorwheninvalid)
 - [id](ISBFObservable.md#id)
 - [isObservable](ISBFObservable.md#isobservable)
@@ -51,9 +52,31 @@ Adds a notification subscription. Consumers can use this to track value changes.
 
 ##### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `value` | [`NotificationSubscription`](../modules.md#notificationsubscription)<`T`\> |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`NotificationSubscription`](../modules.md#notificationsubscription)<`T`\> | The notification subscription. |
+
+##### Returns
+
+`void`
+
+___
+
+### addValidationRule
+
+• **addValidationRule**: (`value`: [`ISBFValidationRule`](ISBFValidationRule.md)) => `void`
+
+#### Type declaration
+
+▸ (`value`): `void`
+
+Adds a validation rule for the observable.
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`ISBFValidationRule`](ISBFValidationRule.md) | The validation rule. |
 
 ##### Returns
 

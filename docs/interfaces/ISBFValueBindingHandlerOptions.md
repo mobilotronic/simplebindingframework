@@ -17,6 +17,7 @@ Value binding handler options.
 - [isBindingHandlerOptionsObject](ISBFValueBindingHandlerOptions.md#isbindinghandleroptionsobject)
 - [keyboardTriggersChange](ISBFValueBindingHandlerOptions.md#keyboardtriggerschange)
 - [observable](ISBFValueBindingHandlerOptions.md#observable)
+- [validationRules](ISBFValueBindingHandlerOptions.md#validationrules)
 
 ## Properties
 
@@ -45,8 +46,20 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
 
 #### Inherited from
 
 [ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[observable](ISBFBindingHandlerOptions.md#observable)
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.
+
+#### Inherited from
+
+[ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[validationRules](ISBFBindingHandlerOptions.md#validationrules)

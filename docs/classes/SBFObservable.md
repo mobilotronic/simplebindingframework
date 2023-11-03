@@ -41,6 +41,7 @@ The SBFObservable.
 ### Methods
 
 - [addNotificationSubscription](SBFObservable.md#addnotificationsubscription)
+- [addValidationRule](SBFObservable.md#addvalidationrule)
 - [dispose](SBFObservable.md#dispose)
 - [isValid](SBFObservable.md#isvalid)
 
@@ -199,7 +200,29 @@ Adds a notification subscription. Consumers can use this to track value changes.
 
 #### Implementation of
 
-ISBFObservable.addNotificationSubscription
+[ISBFObservable](../interfaces/ISBFObservable.md).[addNotificationSubscription](../interfaces/ISBFObservable.md#addnotificationsubscription)
+
+___
+
+### addValidationRule
+
+▸ **addValidationRule**(`value`): `void`
+
+Adds a validation rule.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | [`ISBFValidationRule`](../interfaces/ISBFValidationRule.md) | The validation rule. |
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+[ISBFObservable](../interfaces/ISBFObservable.md).[addValidationRule](../interfaces/ISBFObservable.md#addvalidationrule)
 
 ___
 

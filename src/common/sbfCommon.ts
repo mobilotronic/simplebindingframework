@@ -4,16 +4,16 @@ import {
     ISBFObservable,
     ISBFTextHandlerOptions
 } from "./interfaces";
-import {SBFTextBindingHandler} from "..";
-import {SBFClickBindingHandler} from "..";
-import {SBFValueBindingHandler} from "..";
-import {SBFVisibleBindingHandler} from "..";
-import {SBFAttributeBindingHandler} from "..";
-import {SBFForEachBindingHandler} from "..";
-import {SBFTemplateBindingHandler} from "..";
-import {SBFEventBindingHandler} from "..";
-import {SBFSelectBindingHandler} from "..";
-import {SBFCssBindingHandler} from "..";
+import {SBFTextBindingHandler} from "../bindingHandlers/sbfTextBindingHandler";
+import {SBFClickBindingHandler} from "../bindingHandlers/sbfClickBindingHandler";
+import {SBFValueBindingHandler} from "../bindingHandlers/sbfValueBindingHandler";
+import {SBFVisibleBindingHandler} from "../bindingHandlers/sbfVisibleBindingHandler";
+import {SBFAttributeBindingHandler} from "../bindingHandlers/sbfAttributeBindingHandler";
+import {SBFForEachBindingHandler} from "../bindingHandlers/sbfForEachBindingHandler";
+import {SBFTemplateBindingHandler} from "../bindingHandlers/sbfTemplateBindingHandler";
+import {SBFEventBindingHandler} from "../bindingHandlers/sbfEventBindingHandler";
+import {SBFSelectBindingHandler} from "../bindingHandlers/sbfSelectBindingHandler";
+import {SBFCssBindingHandler} from "../bindingHandlers/sbfCssBindingHandler";
 import {SBFObservable} from "./sbfObservable";
 
 export type SBFLoglevel = "info" | "error" | "warning" | "debug";
@@ -22,20 +22,39 @@ export type SBFErrorType = "error" | "evalError" | "rangeError" | "referenceErro
 export const SBF_CURRENT_BINDING_CONTEXT = "_SBF_CURRENT_BINDING_CONTEXT";
 export const SBF_PARENT_BINDING_CONTEXT = "_SBF_PARENT_BINDING_CONTEXT";
 export const SBF_SKIP_CONTEXT_BINDING ="_SBF_SKIP_CONTEXT_BINDING";
+export const SBF_RESERVED_WORD_PREFIX = "$";
 export const SBFReservedWordDictionary = {
     /**
      * Parent binding context.
      */
-    $parent:"$parent",
+    $parent:`${SBF_RESERVED_WORD_PREFIX}parent`,
     /**
      * Localization object.
      */
-    $localization:"$localization",
+    $localization:`${SBF_RESERVED_WORD_PREFIX}localization`,
     /**
      * Window object.
      */
-    $window:"$window"
+    $window:`${SBF_RESERVED_WORD_PREFIX}window`,
+    /**
+     * Used to access the default set of validationRules, that can be defined through a binding string.
+     */
+    $validationRules: `${SBF_RESERVED_WORD_PREFIX}validationRules`,
+
+    stringHasReservedWord(value:string):boolean {
+        let result = false;
+        for(let p in this){
+            if(value.indexOf(p) >= 0){
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 };
+
+export const isSBFReservedObject = "isSBFReservedObject";
+export const isBindingHandlerOptionsObject = "isBindingHandlerOptionsObject";
 
 
 // noinspection JSUnusedLocalSymbols
@@ -149,6 +168,11 @@ export class SBFCommon{
                 }
             }
         }
+    }
+
+    public static uuid():string{
+        return (<any>([1e7])+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, fun =>
+        (fun ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> fun / 4).toString(16));        
     }
 
     /**

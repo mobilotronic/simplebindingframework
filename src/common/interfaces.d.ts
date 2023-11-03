@@ -100,9 +100,15 @@ export interface ISBFObservable<T>{
     value:T;
     /**
      * Adds a notification subscription. Consumers can use this to track value changes.
-     * @param value
+     * @param value The notification subscription.
      */
     addNotificationSubscription:(value:NotificationSubscription<T>)=>void;
+    /**
+     * Adds a validation rule for the observable.
+     * @param value The validation rule.
+     * @returns 
+     */
+    addValidationRule:(value:ISBFValidationRule)=>void;
     /**
      * Unique identifier for this observable.
      */
@@ -170,13 +176,17 @@ export interface ISBFLocalization{
  */
 export interface ISBFBindingHandlerOptions{
     /**
-     * The bound observable or primitive value
+     * The bound observable or primitive value.
      */
     observable?:ISBFObservable<any>;
     /**
      * Always returns true.
      */
     isBindingHandlerOptionsObject?:boolean;
+    /**
+     * Validation rules.
+     */
+    validationRules?:Array<ISBFValidationRule>;
 }
 
 /**

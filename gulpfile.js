@@ -87,6 +87,13 @@ function copyFiles() {
         configuration.source.readme
     ]).pipe(gulp.dest(getCurrentEnvironment().output));
 }
+
+function copyToExampleFolder(){
+    return gulp.src([
+        `${configuration.environment.production.output}/**/*.*`
+    ]).pipe(gulp.dest("example/node_modules/@mobilotronic/sbf"));
+}
+
 /**
  * Compiles typescript.
  */
@@ -151,6 +158,7 @@ gulp.task("compileTS", gulp.series([compileTS]));
 gulp.task("publishMajor",gulp.series([incrementMajor,"buildProduction"]));
 gulp.task("publishMinor",gulp.series([incrementMinor,"buildProduction"]));
 gulp.task("publishPatch",gulp.series([incrementPatch,"buildProduction"]));
+gulp.task("buildToExample", gulp.series([productionEnv, compileTS,cleanBuildFolder, copyFiles,cleanProductionJSON,copyToExampleFolder]));
 
 
 //#endregion

@@ -17,6 +17,7 @@ Foreach binding handler. Use this to render an array of data using the 1st child
 - [data](ISBFForeachHandlerOptions.md#data)
 - [isBindingHandlerOptionsObject](ISBFForeachHandlerOptions.md#isbindinghandleroptionsobject)
 - [observable](ISBFForeachHandlerOptions.md#observable)
+- [validationRules](ISBFForeachHandlerOptions.md#validationrules)
 
 ## Properties
 
@@ -42,8 +43,20 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
 
 #### Inherited from
 
 [ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[observable](ISBFBindingHandlerOptions.md#observable)
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.
+
+#### Inherited from
+
+[ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[validationRules](ISBFBindingHandlerOptions.md#validationrules)

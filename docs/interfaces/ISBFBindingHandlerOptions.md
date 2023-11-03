@@ -28,6 +28,7 @@ Base interface for all binding handler options.
 
 - [isBindingHandlerOptionsObject](ISBFBindingHandlerOptions.md#isbindinghandleroptionsobject)
 - [observable](ISBFBindingHandlerOptions.md#observable)
+- [validationRules](ISBFBindingHandlerOptions.md#validationrules)
 
 ## Properties
 
@@ -43,4 +44,12 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.

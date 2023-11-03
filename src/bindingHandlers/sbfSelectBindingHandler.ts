@@ -7,15 +7,34 @@ export class SBFSelectBindingHandler extends SBFBaseBindingHandler<ISBFSelectHan
     //#region private
     private static allowedElements = ["SELECT","DATALIST"];
     private get dataToRender(){ return SBFCommon.isObservable(this.bindingOptions.data) ? this.bindingOptions.data.value : this.bindingOptions.data;}
+    /**
+     * Overriding the default behavior as the select binding should add rules to the value observable.
+     * If the binding options have validation rules, ensure they are added to the observable.
+     */    
+    protected processValidationRules(){
+        if(this.bindingOptions.isBindingHandlerOptionsObject){
+            if(Array.isArray(this.bindingOptions.validationRules) && (this.bindingOptions.value && this.bindingOptions.value.isObservable)){
+                this.bindingOptions.validationRules.forEach((r)=>{
+                    this.bindingOptions.value.addValidationRule(r);
+                });
+            }
+        }
+    }    
     private onSelectionChange(event:Event){
-        if((<HTMLSelectElement>this.element).selectedIndex >= 0) {
-            let selectedItem = this.dataToRender[(<HTMLSelectElement>this.element).selectedIndex];
+        let selectedIndex = (<HTMLSelectElement>this.element).selectedIndex;
+        if(selectedIndex >= 0) {
+            //if there is a selection label, we need to adjust the index by subtracting one
+            //so the index would match the actual data in the data array.
+            //the selectionLabel value(if it exists) is always rendered at index zero
+            if(this.bindingOptions.selectionLabel) selectedIndex--;
+            let newValue =  selectedIndex < 0 ? null : this.dataToRender[selectedIndex];
+
             if (this.bindingOptions.onSelectionChange) {
-                this.bindingOptions.onSelectionChange(selectedItem,event);
+                this.bindingOptions.onSelectionChange(newValue,event);
             }
             if(this.bindingOptions.value){
-                this.bindingOptions.value.value = selectedItem;
-            }
+                this.bindingOptions.value.value = newValue;
+            }            
         }
     }
     private renderData(data:Array<any>){
@@ -48,11 +67,18 @@ export class SBFSelectBindingHandler extends SBFBaseBindingHandler<ISBFSelectHan
         if(SBFCommon.isObservable(this.bindingOptions.value)){
             this.bindingOptions.value.addNotificationSubscription((value)=>{
                 let dataToRender = Array.isArray(this.bindingOptions.data) ? this.bindingOptions.data : this.bindingOptions.data.value;
-                (<HTMLSelectElement>this.element).selectedIndex = dataToRender.findIndex((dataRow,index)=>{
-                    //if there is a value field defined, then use that to find the index of the selected value.
-                    //if no valueField is defined, then assume that the value is the value valueField.
-                    return this.bindingOptions.valueField ? dataRow[this.bindingOptions.valueField] == value[this.bindingOptions.valueField] : dataToRender[index] == value;
-                });
+                if(value){
+                     let itemIndex = dataToRender.findIndex((dataRow,index)=>{
+                        //if there is a value field defined, then use that to find the index of the selected value.
+                        //if no valueField is defined, then assume that the value is the value valueField.
+                        return this.bindingOptions.valueField ? dataRow[this.bindingOptions.valueField] == value[this.bindingOptions.valueField] : dataToRender[index] == value;
+                    });
+                    //if there is a selection label, we need to adjust the index by subtracting one
+                    //so the index would match the actual data in the data array.
+                    //the selectionLabel value(if it exists) is always rendered at index zero                    
+                    if(this.bindingOptions.selectionLabel) itemIndex++;
+                    (<HTMLSelectElement>this.element).selectedIndex = itemIndex;
+                }else { (<HTMLSelectElement>this.element).selectedIndex = 0; }
             });
         }
         this.renderData(this.dataToRender);

@@ -1,6 +1,6 @@
 import {ISBFLocalization, ISBFTextHandlerOptions} from "../common/interfaces";
 import {SBFBaseBindingHandler} from "./sbfBindingHandler";
-import {SBFObservable} from "..";
+import {SBFObservable} from "../common/sbfObservable";
 
 export class SBFTextBindingHandler extends SBFBaseBindingHandler<ISBFTextHandlerOptions>{
     //#region private

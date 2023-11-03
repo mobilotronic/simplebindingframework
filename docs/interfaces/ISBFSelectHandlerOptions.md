@@ -20,6 +20,7 @@ Select binding handler.
 - [observable](ISBFSelectHandlerOptions.md#observable)
 - [onSelectionChange](ISBFSelectHandlerOptions.md#onselectionchange)
 - [selectionLabel](ISBFSelectHandlerOptions.md#selectionlabel)
+- [validationRules](ISBFSelectHandlerOptions.md#validationrules)
 - [value](ISBFSelectHandlerOptions.md#value)
 - [valueField](ISBFSelectHandlerOptions.md#valuefield)
 
@@ -57,7 +58,7 @@ ___
 
 • `Optional` **observable**: [`ISBFObservable`](ISBFObservable.md)<`any`\>
 
-The bound observable or primitive value
+The bound observable or primitive value.
 
 #### Inherited from
 
@@ -93,6 +94,18 @@ ___
 • `Optional` **selectionLabel**: `string`
 
 If defined an empty value option item will be created and it's text would be the optionLabel
+
+___
+
+### validationRules
+
+• `Optional` **validationRules**: [`ISBFValidationRule`](ISBFValidationRule.md)[]
+
+Validation rules.
+
+#### Inherited from
+
+[ISBFBindingHandlerOptions](ISBFBindingHandlerOptions.md).[validationRules](ISBFBindingHandlerOptions.md#validationrules)
 
 ___
 

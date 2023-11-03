@@ -1,0 +1,21 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ES6",
+      "lib": ["dom","ES6","ScriptHost","ES2015.Iterable"],
+      "sourceMap": true,
+      "watch": false,
+      "removeComments": true,
+      "noEmitOnError": true,
+      "alwaysStrict": false,
+      "experimentalDecorators": false,
+      "noEmitHelpers": false
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }

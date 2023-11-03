@@ -6,6 +6,7 @@ import {
     ISBFForeachHandlerOptions,
     ISBFLocalization, ISBFObservable, ISBFObservableOptions, ISBFSelectHandlerOptions, ISBFTemplateHandlerOptions,
     ISBFTextHandlerOptions,
+    ISBFValidationRule,
     ISBFValueBindingHandlerOptions,
     ISBFVisibleHandlerOptions, NotificationSubscription
 } from "./common/interfaces";
@@ -45,6 +46,10 @@ export declare class SBFObservable<T> implements ISBFObservable<T>{
      * @param notificationSubscription - The notification subscription.
      */
     addNotificationSubscription(notificationSubscription:NotificationSubscription<T>);
+    /**
+     * Adds a validation rule for the observable.
+     */
+    addValidationRule: (value: ISBFValidationRule) => void;
     /**
      * Observable's options.
      */

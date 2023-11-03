@@ -1,5 +1,6 @@
 import {SBFBaseBindingHandler} from "./sbfBindingHandler";
 import {ISBFEventHandlerOptions, ISBFLocalization} from "../common/interfaces";
+import {isBindingHandlerOptionsObject} from "../common/sbfCommon";
 
 interface ISBFEventListenerProxy{
     eventName:string;
@@ -19,7 +20,7 @@ export class SBFEventBindingHandler extends SBFBaseBindingHandler<ISBFEventHandl
     }
     private processAndApplyEvents(){
         for(let event in this.bindingOptions){
-            if(event != "isBindingHandlerOptionsObject"){
+            if(event != isBindingHandlerOptionsObject){
                 let eventListener = this.bindingOptions[event] ? this.bindingOptions[event]: event;
                 if(typeof eventListener != "function") {
                     let errorMessage = "Event listener must be a method.";
